@@ -1,0 +1,17 @@
+[project]
+name = "DSA"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "m.k.amanzhan@gmail.com", email = "m.k.amanzhan@gmail.com"},
+]
+dependencies = [
+    "icecream>=2.1.3",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
