@@ -28,8 +28,19 @@ def assert_solutions(
                 print(message)
 
 
+def _print_time(elapsed: float) -> str:
+    if elapsed < 1e-6:
+        return f"{elapsed * 1e9:.3f} nanoseconds"
+    elif elapsed < 1e-3:
+        return f"{elapsed * 1e6:.3f} microseconds"
+    elif elapsed < 1:
+        return f"{elapsed * 1e3:.3f} milliseconds"
+    else:
+        return f"{elapsed:.3f} seconds"
+
+
 def profile_solutions(solutions: list[Callable] | Callable, test_cases: list[TestCase]) -> None:
-    # show in seconds like 0.0001
+    # show in human readable format: 0.001 seconds or 0.001 milliseconds or 0.001 microseconds or 0.001 nanoseconds
     if callable(solutions):
         solutions = [solutions]
 
@@ -37,4 +48,5 @@ def profile_solutions(solutions: list[Callable] | Callable, test_cases: list[Tes
         start = time.time()
         assert_solutions(solution, test_cases)
         end = time.time()
-        print(f"{solution.__name__} took: {end - start:.4f} seconds")
+        elapsed = end - start
+        print(f"{solution.__name__} took {_print_time(elapsed)}")
